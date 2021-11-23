@@ -1,17 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-try:
-    from setuptools import setup, find_packages
-    from setuptools.command.test import test
-    is_setuptools = True
-except ImportError:
-    raise
-    from ez_setup import use_setuptools
-    use_setuptools()
-    from setuptools import setup, find_packages           # noqa
-    from setuptools.command.test import test              # noqa
-    is_setuptools = False
+from setuptools import find_packages
+from promebuilder import setup
+from setuptools.command.test import test
+
+is_setuptools = True
 
 import os
 import re
@@ -182,7 +176,7 @@ if is_setuptools:
 
 # -*- %%% -*-
 
-setup(
+setup(dict(
     name=NAME,
     version=meta['VERSION'],
     description=meta['doc'],
@@ -199,4 +193,5 @@ setup(
     classifiers=classifiers,
     entry_points=entrypoints,
     long_description=long_description,
-    **extra)
+    **extra
+))

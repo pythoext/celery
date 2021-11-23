@@ -36,10 +36,10 @@ def asynloop(obj, connection, consumer, blueprint, hub, qos,
         hub.call_repeatedly(heartbeat / hbrate, hbtick, hbrate)
 
     consumer.callbacks = [on_task_received]
-    consumer.consume()
-    obj.on_ready()
     obj.controller.register_with_event_loop(hub)
     obj.register_with_event_loop(hub)
+    consumer.consume()
+    obj.on_ready()
 
     # did_start_ok will verify that pool processes were able to start,
     # but this will only work the first time we start, as
